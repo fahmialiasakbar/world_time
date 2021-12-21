@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'dart:convert';
 
 class ChooseLocation extends StatefulWidget {
   @override
@@ -9,21 +11,16 @@ class _ChooseLocationState extends State<ChooseLocation> {
   int counter = 0;
 
   void getData() async {
-    String name = await Future.delayed(Duration(seconds: 3), () {
-      return 'Jake';
-    });
-
-    String age = await Future.delayed(Duration(seconds: 2), () {
-      return '23';
-    });
-
-    print('$name - $age');
+    Response response =
+        await get(Uri.parse('https://jsonplaceholder.typicode.com/todos/1'));
+    Map data = jsonDecode(response.body);
+    print(data);
+    print(data['title']);
   }
 
   @override
   void initState() {
     super.initState();
-    print("Sudah selesai");
     getData();
   }
 
