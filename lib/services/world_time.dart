@@ -21,10 +21,9 @@ class WorldTime {
       String offset = data['utc_offset'].substring(1, 3);
 
       DateTime now = DateTime.parse(datetime);
-      now.add(Duration(hours: int.parse(offset)));
+      now = now.add(Duration(hours: int.parse(offset)));
 
       time = DateFormat.jm().format(now);
-
       isDayTime = now.hour > 6 && now.hour < 18 ? true : false;
     } catch (e) {
       print('Caught error: $e');
